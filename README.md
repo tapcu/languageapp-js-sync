@@ -1,4 +1,5 @@
-# nginx refirect config
+# config
+## nginx refirect
 ```
 location ~ ^/ {
     proxy_pass http://127.0.0.1:3000;
@@ -7,9 +8,30 @@ location ~ ^/ {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-Port $server_port;
-    access_log off;
 }
 ```
+## systemd service 
+run npm run prestart:prod first to compile code!
+see https://stackoverflow.com/a/42126391
+```
+[Unit]
+Description=langapp-sync
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node dist/main.js
+Restart=always
+User=intown
+Group=intown
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/www/intown/data/syncapp
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
