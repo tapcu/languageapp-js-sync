@@ -1,3 +1,16 @@
+# nginx refirect config
+```
+location ~ ^/ {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_redirect http://127.0.0.1:3000 /;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Port $server_port;
+    access_log off;
+}
+```
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
