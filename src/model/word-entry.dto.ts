@@ -5,4 +5,5 @@ export class WordEntryDto {
     readonly correct_answers: number;
     readonly iteration: number;
     readonly next_show_date: string;
+    readonly last_update_date: string;
 }

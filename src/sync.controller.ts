@@ -5,13 +5,15 @@ import {WordEntryDto} from './model/word-entry.dto';
 
 @Controller('sync')
 export class SyncController {
-    constructor(protected db: DatabaseService) { }
+    constructor(protected db: DatabaseService) {
+        console.log("database is: " + this.db);
+    }
 
     @Put()
     public updateDatabase(@Body() body: SyncRequestBodyDto){
-        // console.log('received update request: ',body);
+        console.log('received update request: ',body.words.length);
         body.words.forEach((word: WordEntryDto)=>{
-            console.log("processing word:", word);
+            // console.log("processing word:", word);
             this.db.upsertWord(word);
         });
         return {
@@ -20,6 +22,7 @@ export class SyncController {
     }
     @Get()
     public getWordsList(){
+        console.log("got GET request");
         return this.db.getWords();
     }
 }
