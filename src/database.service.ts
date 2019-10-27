@@ -35,7 +35,8 @@ export class DatabaseService {
                     iteration = excluded.iteration,
                     next_show_date = excluded.next_show_date,
                     last_update_date = excluded.last_update_date
-                    where (id=excluded.id) and (last_update_date<excluded.last_update_date);
+                    where (id=excluded.id) 
+					and (last_update_date is null or last_update_date<excluded.last_update_date);
             `,
                 [word.id, word.word, word.translation, word.correct_answers, word.iteration, word.next_show_date, word.last_update_date],
                 err => { if (err) console.log("Error during word upsert:",err) }
